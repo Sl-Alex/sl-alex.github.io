@@ -1,7 +1,70 @@
 ---
 layout: default
 ---
-<div>
-	<h1>Test page!</h1>
-	<p>This is just a test page</p>
+
+<div class="page clearfix" index>
+    <div class="left">
+        <h1>Welcome to my blog!</h1>
+        <small>It's a home for my pet projects and some useful findings.</small>
+        <hr>
+        <ul>
+            {% for post in paginator.posts %}
+              <li>
+                <h2>
+                  <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fas fa-calendar-alt"></i>{{ post.date | date: "%F" }}
+                    </div>
+                    <div class="label-card">
+                        {% if post.author %}<i class="fas fa-user"></i>{{ post.author }}
+                        {% endif %}
+                    </div>
+                    <div class="label-card">
+                        {% if page.meta %}<i class="fas fa-key"></i>{{ page.meta }}  {% endif %}
+                    </div>
+
+                    <div class="label-card">
+                    {% include category.html %}
+                    </div>
+
+                    <div class="label-card">
+                    {% include tag.html %}
+                    </div>
+                </div>
+                <div class="excerpt">
+                    {{post.excerpt}}
+                </div>
+                <div class="read-all">
+                    <a  href="{{ post.url | prepend: site.baseurl }}"><i class="fas fa-newspaper"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            {% endfor %}
+        </ul>
+
+
+
+        <!-- Pagination links -->
+        <div class="pagination">
+          {% if paginator.previous_page %}
+            <a href="/index.html" class="previous"><i class="fas fa-angle-double-left"></i></a>
+            <a href="{{ paginator.previous_page_path | prepend: site.baseurl }}" class="previous"><i class="fas fa-angle-left"></i></a>
+          {% else %}
+            <span class="previous disable"><i class="fas fa-angle-double-left"></i></span>
+            <span class="previous disable"><i class="fas fa-angle-left"></i></span>
+          {% endif %}
+          <span class="page_number ">{{ paginator.page }}/{{ paginator.total_pages }}</span>
+          {% if paginator.next_page %}
+            <a href="{{ paginator.next_page_path }}" class="next"><i class="fas fa-angle-right"></i></a>
+            <a href="{{ site.baseurl }}/page{{ paginator.total_pages }}" class="next"><i class="fas fa-angle-double-right"></i></a>
+          {% else %}
+            <span class="next disable"><i class="fas fa-angle-right"></i></span>
+            <span class="next disable"><i class="fas fa-angle-double-right"></i></span>
+          {% endif %}
+        </div>
+    </div>
+    <button class="anchor"><i class="fas fa-anchor"></i></button>
+	{% include side_block.html %}
 </div>

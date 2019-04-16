@@ -1,2 +1,50 @@
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely need to edit after that.
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'jekyll serve'. If you change this file, please restart the server process.
+
+# Site settings
 title: Sl-Alex home lab
+#brief-intro: Brief
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://sl-alex.github.io" # the base hostname & protocol for your site
+
+permalink: /:categories/:year/:month/:day/:title/
+
+# other links
+#twitter_username:
+#facebook_username: 
+github_username:  Sl-Alex
+email: alexslabchenko@gmail.com
+linkedIn_username: oleksii-slabchenko-a78044140
+
+description_footer: Sl-Alex home lab 2004 - 2019 
+
+# comments
+#disqus_shortname:
+
+# statistic analysis
+#google_analytics_id: UA-72449510-4
+
+# Build settings
 markdown: kramdown
+
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+# port
+# port: 1234
+
+# url
+category_dir: category/
+tag_dir: tag/
+
+# excerpt
+excerpt_separator: "\n\n\n\n"
+
+# paginate
+plugins: [jekyll-paginate]
+paginate: 6
