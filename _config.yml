@@ -9,7 +9,7 @@
 title: Sl-Alex home lab
 #brief-intro: Brief
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://sl-alex.github.io" # the base hostname & protocol for your site
+url: "https://sl-alex.net" # the base hostname & protocol for your site
 
 permalink: /:categories/:year/:month/:day/:title/
 
