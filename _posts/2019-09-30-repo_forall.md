@@ -1,6 +1,6 @@
 ---
 layout: post
-title: repo_forall alias
+title: Show project name using "repo forall" alias
 categories: linux
 tags: repo
 author: Sl-Alex
