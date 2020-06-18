@@ -40,11 +40,20 @@ foo(3)
 
 And here is the same code with syntax highlighting:
 
+Javascript:
 ```javascript
 var foo = function(x) {
   return(x + 5);
 }
 foo(3)
+```
+
+OpenSCAD:
+```scad
+module bom_item(name)
+{
+    echo(str("BOM_ITEM: ", name));
+}
 ```
 
 VHDL code:
