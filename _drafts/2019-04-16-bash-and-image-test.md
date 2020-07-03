@@ -48,11 +48,11 @@ var foo = function(x) {
 foo(3)
 ```
 
-OpenSCAD:
-```scad
+OpenSCAD (no OpenSCAD support, replaced with CPP):
+```cpp
 module bom_item(name)
 {
-    echo(str("BOM_ITEM: ", name));
+    echo(str("BOM_ITEM: ", name));
 }
 ```
 

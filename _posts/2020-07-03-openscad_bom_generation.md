@@ -22,20 +22,20 @@ After analyzing different possibilities I came to a conclusion that the simplest
 
 # Injecting a string
 This is the easiest part, just create a "bom.scad" with the following content:
-```scad
+```cpp
 module bom_item(name)
 {
-    echo(str("BOM_ITEM: ", name));
+    echo(str("BOM_ITEM: ", name));
 }
 ```
 
 Then add the following line to each of parts you are using:
-```scad
+```cpp
 bom_item("part_name");
 ```
 
 If you have a parameterizable part you can include your parameters to the part name in the following way:
-```scad
+```cpp
 bom_item(str("sfu1605_", length));
 ```
 That's it for the preparation, all parts will be in the log and now we're ready to count them:
