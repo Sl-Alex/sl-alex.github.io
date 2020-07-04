@@ -15,6 +15,8 @@ After analyzing different possibilities I came to a conclusion that the simplest
 **_TL;DR_**
 > Add this to your OpenSCAD project: [bom.scad](/attachments/bom.scad)
 >
+> Add this line to each of your parts: bom_item("part_name");
+>
 > Generate BOM using this: [generate_bom.py](/attachments/generate_bom.py)
 
 
