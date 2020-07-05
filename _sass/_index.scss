@@ -52,9 +52,14 @@
                     font-size: 14px;
                     a {
                         color: #778ab0;
+                        background: #eee;
+                        border: 1px solid #ccc;
+                        box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);
+                        padding: 0.5em;
                         transition: 0.2s ease;
                         &:hover {
                             color: #5872a7;
+                            background: #ccc;
                         }
                         i {
                             padding-right: 3px;
