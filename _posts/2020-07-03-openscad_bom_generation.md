@@ -2,7 +2,7 @@
 layout: post
 title: Automatic BOM creation in OpenSCAD
 categories: 3D
-tags: OpenSCAD, Python
+tags: OpenSCAD Python
 author: Sl-Alex
 ---
 # Background
