@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Embedded C++ output size minimization
+description: How to minimize C++ binary size
 categories: Embedded
 tags: C++ MCU
 author: Sl-Alex

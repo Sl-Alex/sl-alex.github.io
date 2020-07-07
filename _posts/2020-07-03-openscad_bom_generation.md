@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Automatic BOM creation in OpenSCAD
-description: BlaBlaBla
+description: How to generate BOM from OpenSCAD hierarchy
 categories: 3D
 tags: OpenSCAD Python
 author: Sl-Alex

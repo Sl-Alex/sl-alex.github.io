@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Privacy policy
+description: Website privacy policy
 author: Sl-Alex
 tags: privacy
 date: 2020-01-01

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Dealing with complex OpenSCAD projects 
+description: How to organize a complex hierarchical OpenSCAD project
 categories: 3D
 tags: OpenSCAD
 author: Sl-Alex
