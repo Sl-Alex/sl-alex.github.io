@@ -1,11 +1,12 @@
 ---
 layout: post
 title: Automatic BOM creation in OpenSCAD
+description: BlaBlaBla
 categories: 3D
 tags: OpenSCAD Python
 author: Sl-Alex
 ---
-# Background
+## Background
 After many days of playing around with free 3D CADs I've ended up with the old good OpenSCAD, which combines a high level of flexibility with low system requirements.
 However, it lacks some features, e.g. the bill of materials and this is exactly what I'm going to do.
 After analyzing different possibilities I came to a conclusion that the simplest way may look like this:
@@ -22,7 +23,7 @@ After analyzing different possibilities I came to a conclusion that the simplest
 
 
 
-# Injecting a string
+## Injecting a string
 This is the easiest part, just create a "bom.scad" with the following content:
 ```cpp
 module bom_item(name)
@@ -42,7 +43,7 @@ bom_item(str("sfu1605_", length));
 ```
 That's it for the preparation, all parts will be in the log and now we're ready to count them:
 
-# Calculating
+## Calculating
 The easiest way to get the log and to parse it is to use Python. The implementation is pretty straightforward:
 - Run OpenSCAD and grab its output.
 - Find a "BOM_ITEM" mark and extract the part name placed after it.
