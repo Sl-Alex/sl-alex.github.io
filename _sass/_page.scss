@@ -18,7 +18,7 @@
         padding: 20px 30px;
         line-height: 1.6;
         font-size: 16px;
-        background-color: #f8f8fd;
+        background-color: #0d1117;
         box-shadow: 0 1px 2px rgba(0,0,0,0.4),0 0 30px rgba(10,10,0,0.1) inset;
         >h1 {
             margin-bottom: -10px;
@@ -40,10 +40,11 @@
                 }
                 .title {
                     font-weight: bold;
-                    color: #223253;
-                    transition: 0.3s ease;
+                    color: #e6a24b;
+                    transition: 0.2s ease;
+                    border-radius: 4px;
                     &:hover {
-                        color: #4d6dad;
+                        background-color: #684820;
                     }
                 }
                 i {
@@ -52,35 +53,33 @@
                 .categories {
                     padding: 0 15px;
                     i {
-                        color: #9e9d9d;
+                        color: #5b696c;
                     }
                     a {
-                        padding: 0 5px;
-                        background-color: #9e9d9d;
-                        color: #fff;
-                        font-size: 90%;
-                        transition: 0.3s ease;
+                        color: #e6a24b;
+                        transition: 0.2s ease;
                         &:hover {
-                            background-color: #b6b6b9;
+                            background-color: #684820;
                         }
+                        padding: 0 5px;
+                        background-color: #382810;
+                        font-size: 90%;
                     }
                 }
                 .pageTag {
                     i {
-                        color: #c6cbe9;
+                        color: #5b696c;
                     }
                     a {
-
-                        // border: 1px solid #aaa;
-                        padding: 0 5px;
-                        background-color: #c6cbe9;
+                        color: #e6a24b;
+                        transition: 0.2s ease;
                         border-radius: 4px;
-                        color: #fff;
-                        font-size: 90%;
-                        transition: 0.3s ease;
                         &:hover {
-                            background-color: #c0ddc7;
+                            background-color: #684820;
                         }
+                        padding: 0 5px;
+                        background-color: #382810;
+                        font-size: 90%;
                     }
                 }
             }
@@ -103,7 +102,7 @@
         }
         .side {
             box-sizing: border-box;
-            background-color: #f8f8fd;
+            background-color: #0d1117;
             box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.3), 0 0 30px rgba(10, 10, 0, 0.1) inset;
             -ms-word-break: break-all;
             word-break: break-all;
@@ -122,10 +121,10 @@
                 font-weight: bold;
             }
             a {
-                color: #4d6dad;
-                transition: 0.5s ease;
+                color: #e6a24b;
+                transition: 0.2s ease;
                 &:hover {
-                    color: #223253;
+                    color: #ffeabb;
                 }
             }
         }

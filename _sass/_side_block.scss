@@ -19,9 +19,9 @@
 						padding: 2px 0;
 						border-bottom: 1px solid #eee;
 						&:hover {
-							background-color: #dbdfee;
+							background-color: #66421b;
 							.badge {
-								background-color: #dbdfee;
+								background-color: #e6a24b;
 								transform: scale(1.2) rotate(360deg);
 							}
 						}
@@ -39,7 +39,7 @@
 							padding: 0 10px;
 							font-size: 12px;
 							color: #fff;
-							background-color: #bbb;
+							background-color: #333;
 							border-radius: 50%;
 							transition: 0.5s ease-in-out;
 						}
@@ -62,7 +62,7 @@
 					padding: 0 3px;
 					border-radius: 5px;
 					&:hover {
-						background-color: #f0e7ce;
+						background-color: #684820;
 					}
 				}
 			}

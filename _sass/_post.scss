@@ -14,16 +14,16 @@
             }
             i {
                 padding-right: 5px;
-                color: #6b6a6a;
+                color: #5b696c;
             }
         }
     }
     a {
-        color: #4d6dad;
-        transition: 0.5s ease;
+        color: #e6a24b;
+        transition: 0.2s ease;
         &:hover {
-            color: #223253;
-            background-color: #f4efeb;
+            color: #ffeabb;
+            background-color: #382810;
         }
     }
     .left {
@@ -32,7 +32,7 @@
                 color: #333;
             }
             li {
-                color: #333;
+                color: #888;
                 margin: 0;
             }
         }
