@@ -1,0 +1,357 @@
+<link rel="stylesheet" href="/assets/chartist.min.css">
+<script src="/assets/chartist.min.js" > </script>
+<script src="/assets/moment.min.js" > </script>
+<style type="text/css">
+    table {
+        width: 100%;
+    }
+
+    button {
+        width: 95%;
+        background-color: #E6A24B;
+        padding: 8px;
+        font-size: 120%;
+    }
+
+.ct-series-a .ct-point {
+  /* Colour of your points */
+  stroke: #e6a24b;
+  /* Size of your points */
+  stroke-width: 2px;
+  /* Make your points appear as squares */
+  stroke-linecap: round;
+}
+
+.ct-series-a .ct-line {
+  /* Set the colour of this series line */
+  stroke: #e6a24b;
+  /* Control the thikness of your lines */
+  stroke-width: 2px;
+}
+
+.ct-label {
+    font-size: 15px;
+    color: #a6afba;
+}
+.ct-grid{ stroke: #777;}
+
+}
+
+</style>
+<script lang="javascript">
+  var maklerProvisionProzent;
+  var grundwerbesteuerProzent;
+  var notarGrundbuchProzent;
+
+  var gesamtbetrag;
+  var eigenkapital;
+  
+  // Calc Nebenkosten
+  var maklerProvision;
+  var grundwerbesteuer;
+  var notarGrundbuch;
+  
+  var nebenkostenProzent;
+  var nebenkosten;
+  
+  var darlehensbetrag;
+  var sollZinsJahren;
+  var zinsen;
+  var tilgung;
+  
+  var monatsRate;
+  var sonderTilgung;
+
+function updateInputs() {
+  // Get inputs
+  maklerProvisionProzent = parseFloat(document.getElementById("InputMaklerProvision").value);
+  grundwerbesteuerProzent = parseFloat(document.getElementById("InputGrundwerbesteuer").value);
+  notarGrundbuchProzent = parseFloat(document.getElementById("InputNotarGrundbuch").value);
+
+  gesamtbetrag = parseFloat(document.getElementById("InputGesamtBetrag").value);
+  eigenkapital = parseFloat(document.getElementById("InputEigenkapital").value);
+  
+  // Calc Nebenkosten
+  maklerProvision = gesamtbetrag * maklerProvisionProzent / 100;
+  grundwerbesteuer = gesamtbetrag * grundwerbesteuerProzent / 100;
+  notarGrundbuch = gesamtbetrag * notarGrundbuchProzent / 100;
+  maklerProvision = Math.round((maklerProvision + Number.EPSILON) * 100) / 100
+  grundwerbesteuer = Math.round((grundwerbesteuer + Number.EPSILON) * 100) / 100
+  notarGrundbuch = Math.round((notarGrundbuch + Number.EPSILON) * 100) / 100
+  
+  nebenkostenProzent = maklerProvisionProzent + grundwerbesteuerProzent + notarGrundbuchProzent;
+  nebenkosten = maklerProvision + grundwerbesteuer + notarGrundbuch;
+  nebenkosten = Math.round((nebenkosten + Number.EPSILON) * 100) / 100
+  
+  darlehensbetrag = gesamtbetrag + nebenkosten - eigenkapital;
+  
+  sollZinsJahren = parseFloat(document.getElementById("InputSollZinsJahren").value);
+  sollZinsMonaten = sollZinsJahren * 12;
+  
+  startDate = new Date(document.getElementById("InputAnfangsdatum").value)
+  
+  zinsen = parseFloat(document.getElementById("InputZinsen").value);
+  tilgung = parseFloat(document.getElementById("InputTilgung").value);
+  
+  monatsRate = darlehensbetrag * (tilgung + zinsen) / ( 12 * 100 );
+  monatsRate = Math.round((monatsRate + Number.EPSILON) * 100) / 100
+  
+  sonderTilgung = parseFloat(document.getElementById("InputSondertilgung").value);
+
+  console.log("MaklerProvisionProzent: " + maklerProvisionProzent)
+  console.log("GrundwerbesteuerProzent: " + grundwerbesteuerProzent)
+  console.log("NotarGrundbuchProzent: " + notarGrundbuchProzent)
+  console.log("NebenkostenProzent: " + nebenkostenProzent)
+  console.log("MaklerProvision: " + maklerProvision)
+  console.log("Grundwerbesteuer: " + grundwerbesteuer)
+  console.log("NotarGrundbuch: " + notarGrundbuch)
+  console.log("Nebenkosten: " + nebenkosten)
+  console.log("GesamtBetrag: " + gesamtbetrag)
+  console.log("Eigenkapital: " + eigenkapital)
+  console.log("Darlehensbetrag: " + darlehensbetrag)
+  console.log("SollZinsMonaten: " + sollZinsMonaten)
+  console.log("Anfangsdatum: " + startDate)
+  
+  // Update calculated inputs
+  document.getElementById("calcMaklerProvision").innerText = maklerProvision.toFixed(2) + " €"
+  document.getElementById("calcGrundwerbesteuer").innerText = grundwerbesteuer.toFixed(2) + " €"
+  document.getElementById("calcNotarGrundbuch").innerText = notarGrundbuch.toFixed(2) + " €"
+  document.getElementById("calcNebenkosten").innerText = nebenkosten.toFixed(2) + " €"
+  document.getElementById("calcDarlehensbetrag").innerText = darlehensbetrag.toFixed(2)
+  document.getElementById("calcNebenkostenProzent").innerText = nebenkostenProzent.toFixed(2)
+  document.getElementById("calcMonatsrate").innerText = monatsRate.toFixed(2) + " €"
+}
+function generateTilgungsplan() {
+  updateInputs();
+
+  var restSchuld = darlehensbetrag;
+  
+  var paymentDate = new Date(startDate.setMonth(startDate.getMonth()+1));
+  
+  var tbl = document.getElementById('calcTable');
+  tbl.style.display = 'table'
+  var tbdy = document.createElement('tbody');
+  var oldtbdy = document.getElementById('calcTableBody');
+  tbdy.setAttribute("id", "calcTableBody")
+  
+  var chartData = [];
+  
+  var zinsenTotal = 0;
+
+  while(( restSchuld > 0) && (sollZinsMonaten > 0)) {
+    var tr = document.createElement('tr');
+
+    // Payment date
+    var td = document.createElement('td');
+    const months = ["Jan", "Feb", "Mar","Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    td.innerText = months[paymentDate.getMonth()] + " " + paymentDate.getFullYear();
+    td.style="text-align: right;"
+    tr.appendChild(td)
+    
+    // Zinsen
+    var zinsenMonat = restSchuld * zinsen / ( 12 * 100 )
+    zinsenMonat = Math.round((zinsenMonat + Number.EPSILON) * 100) / 100
+    
+    zinsenTotal += zinsenMonat;
+    
+    // Zahlung
+    var zahlungMonat = monatsRate;
+    if (paymentDate.getMonth() === 0){
+        zahlungMonat += sonderTilgung;
+    }
+    
+    // Tilgung
+    var tilgungMonat = zahlungMonat - zinsenMonat;
+	if (tilgungMonat > restSchuld) {
+      tilgungMonat = restSchuld
+      zahlungMonat = tilgungMonat + zinsenMonat;
+    }
+    
+    tilgungMonat = Math.round((tilgungMonat + Number.EPSILON) * 100) / 100
+    
+    // restSchuld
+    restSchuld -= tilgungMonat;
+    restSchuld = Math.round((restSchuld + Number.EPSILON) * 100) / 100
+
+    td = document.createElement('td');
+    td.innerText = zahlungMonat.toFixed(2);
+    td.style="text-align: right;"
+    tr.appendChild(td)
+
+    td = document.createElement('td');
+    td.innerText = tilgungMonat.toFixed(2);
+    td.style="text-align: right;"
+    tr.appendChild(td)
+
+    td = document.createElement('td');
+    td.innerText = zinsenMonat.toFixed(2);
+    td.style="text-align: right;"
+    tr.appendChild(td)
+
+    td = document.createElement('td');
+    td.innerText = restSchuld.toFixed(2);
+    td.style="text-align: right;"
+    tr.appendChild(td)
+    
+    chartData.push({x: new Date(paymentDate), y: restSchuld});
+    
+    sollZinsMonaten -= 1;
+
+    if (( restSchuld <= 0) || (sollZinsMonaten <= 0)) {
+      document.getElementById("calcEndedatum").innerText = months[paymentDate.getMonth()] + " " + paymentDate.getFullYear();
+      document.getElementById("calcRestschuld").innerText = restSchuld.toFixed(2) + " €";
+      document.getElementById("calcZinsen").innerText = zinsenTotal.toFixed(2) + " €";
+    }
+
+    paymentDate.setMonth(paymentDate.getMonth()+1)
+    
+    tbdy.appendChild(tr);
+  }
+
+  tbl.replaceChild(tbdy, oldtbdy);
+  
+  var data = {
+  // A labels array that can contain any sort of values
+  // Our series array that contains series objects or in this case series data arrays
+  series: [{
+    name: 'dataLog',
+    data: chartData
+  }]
+};
+
+var options = {
+  axisY: {
+    offset: 60,
+    low: 0
+  },
+  axisX: {
+    type: Chartist.FixedScaleAxis,
+    divisor: 5,
+    labelInterpolationFnc: function(value) {
+      return moment(value).format('MMM YYYY');
+    }
+  }
+}
+
+// Create a new line chart object where as first parameter we pass in a selector
+// that is resolving to our chart container element. The Second parameter
+// is the actual data object.
+new Chartist.Line('.ct-chart', data, options);
+
+}
+</script>
+
+<table>
+  <tr>
+    <th colspan="3">Finanzierungsbedarf</th>
+  </tr>
+  <tr>
+    <td>GesamtBetrag, €</td>
+    <td><input id="InputGesamtBetrag" type="number" onchange="updateInputs()" value="350000"></td>
+  </tr>
+  <tr>
+    <td>Eigenkapital, €</td>
+    <td><input id="InputEigenkapital" type="number" onchange="updateInputs()" value="35000"></td>
+  </tr>
+  <tr>
+    <td>Darlehensbetrag, €</td>
+    <td id="calcDarlehensbetrag"></td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <th colspan="3">Gebühren</th>
+  </tr>
+  <tr>
+    <td>Maklerprovision, %</td>
+    <td><input id="InputMaklerProvision" type="number" onchange="updateInputs()" value="3.5"></td>
+    <td id="calcMaklerProvision"></td>
+  </tr>
+  <tr>
+    <td>Grundwerbesteuer, %</td>
+    <td><input id="InputGrundwerbesteuer" type="number" onchange="updateInputs()" value="3.5"></td>
+    <td id="calcGrundwerbesteuer"></td>
+  </tr>
+  <tr>
+    <td>Notar und Grundbuch, %</td>
+    <td><input id="InputNotarGrundbuch" type="number" onchange="updateInputs()" value="2.0"></td>
+    <td id="calcNotarGrundbuch"></td>
+  </tr>
+  <tr>
+    <td>Nebenkosten gesamt, %</td>
+    <td id="calcNebenkostenProzent"></td>
+    <td id="calcNebenkosten"></td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <th colspan="2">Andere Einzelheiten</th>
+  </tr>
+  <tr>
+    <td>Tilgung, % p.a.</td>
+    <td><input id="InputTilgung" type="number" onchange="updateInputs()" value="2.0"></td>
+  </tr>
+  <tr>
+    <td>Effektivzinsen, % p.a.</td>
+    <td><input id="InputZinsen" type="number" onchange="updateInputs()" value="2.0"></td>
+  </tr>
+  <tr>
+    <td>Sondertilgung, € p.a.</td>
+    <td><input id="InputSondertilgung" type="number" onchange="updateInputs()" value="10000"></td>
+  </tr>
+  <tr>
+    <td>Sollzinsbindung, Jahren</td>
+    <td><input id="InputSollZinsJahren" type="number" onchange="updateInputs()" value="15"></td>
+  </tr>
+  <tr>
+    <td>Anfangsdatum</td>
+    <td><input id="InputAnfangsdatum" type="date"></td>
+  </tr>
+  <tr>
+    <td>Endedatum</td>
+    <td id="calcEndedatum"></td>
+  </tr>
+  <tr>
+    <td>Monatsrate</td>
+    <td id="calcMonatsrate"></td>
+  </tr>
+  <tr>
+    <td>Restschuld</td>
+    <td id="calcRestschuld"></td>
+  </tr>
+  <tr>
+    <td>Zinsen</td>
+    <td id="calcZinsen"></td>
+  </tr>
+</table>
+
+<br />
+
+<button onclick="generateTilgungsplan()">Berechnen</button>
+
+<br />
+
+<div class="ct-chart ct-minor-seventh"></div>
+
+<br />
+
+<table id="calcTable" style="display:none" border="1">
+<tr>
+  <th colspan = "5">Tilgungsplan</th>
+</tr>
+<tr>
+  <th>Datum</th>
+  <th>Zahlung</th>
+  <th>Tilgung</th>
+  <th>Zinsen</th>
+  <th>Rest</th>
+</tr>
+<tbody id="calcTableBody"></tbody></table>
+
+<script lang="javascript">
+  // Set default start date to now
+  document.getElementById('InputAnfangsdatum').value = moment().format('YYYY-MM-DD');
+  updateInputs()
+</script>
