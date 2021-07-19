@@ -3,7 +3,7 @@ layout: post
 title: IRMP mini - a small STM32 USB IR receiver
 description: Simple IR USB receiver
 categories: Embedded
-tags: PCB IR
+tags: PCB IR USB
 author: Sl-Alex
 image: 2021-01-25-irmpmini_board/pcb.png
 --- 
