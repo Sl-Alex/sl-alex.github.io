@@ -8,7 +8,9 @@ layout: default
         <div class="label">
 
             <div class="label-card">
+                {% if page.date %}
                 <i class="fas fa-calendar-alt"></i>{{ page.date | date: "%F" }}
+                {% endif %}
             </div>
 
             <div class="label-card">
@@ -25,7 +27,9 @@ layout: default
             </div>
 
             <div class="label-card">
-            {% include tag.html %}
+                {% if page.tags %}
+                {% include tag.html %}
+                {% endif %}
             </div>
 
         </div>
