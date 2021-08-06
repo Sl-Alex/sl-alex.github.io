@@ -17,6 +17,7 @@
             <a href="https://www.facebook.com/{{site.facebook_username}}" title="Facebook"><i class="fab fa-facebook" aria-hidden="true"></i></a> {% endif %}
             {% if site.linkedIn_username %}
             <a href="https://www.linkedin.com/in/{{site.linkedIn_username}}" title="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a> {% endif %}
+            <a href="{{site.baseurl | prepend: site.url }}/feed.xml" title="RSS"><i class="fa fa-rss" aria-hidden="true"></i></a>
         </p>
         <p class="power">
             All materials on this site may be freely used as long as the link to the original material is mentioned. <a href="/privacy_policy">Privacy policy</a>
