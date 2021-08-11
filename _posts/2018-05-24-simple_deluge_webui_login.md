@@ -2,7 +2,7 @@
 layout: post
 title: Simple Deluge WebUI login
 description: How to log into Deluge WebUI without any pop-up windows
-categories: Internet
+categories: Web
 tags: Deluge
 author: Sl-Alex
 ---
