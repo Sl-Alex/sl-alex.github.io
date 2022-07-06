@@ -18,7 +18,7 @@ The only thing was missing: the breakout board for blackpill with isolated input
 
 {% include image.html url="/assets/2022-07-06-grblhal_breakout_black_pill/pinout.webp" description="Here is how it looks like" %}
 
-The board is compatible with the default grblHAL black pill mpin mapping. The schematic is really simple: 12 inputs (4 of them are not used, so can be connected to any blackpill pin manually), 17 outputs (6 are not used at the moment).
+The project is available [here](https://github.com/Sl-Alex/grblHAL_BlackPill_F4xx_breakout). The board is compatible with the default grblHAL black pill pin mapping. The schematic is really simple: 12 inputs (4 of them are not used, so can be connected to any blackpill pin manually), 17 outputs (6 are not used at the moment).
 Here is how the input is implemented:
 
 {% include image.html url="/assets/2022-07-06-grblhal_breakout_black_pill/input.png" description="Sample isolated input" %}
