@@ -41,7 +41,7 @@ class ShortcutEdit(QLineEdit):
             if event.key() == 0 and int(event.modifiers()) == 0:
                 return True
 
-            print(f'KeyPress: Key={event.key()}, Modifier={int(event.modifiers)}')
+            print(f'KeyPress: Key={event.key()}, Modifier={int(event.modifiers())}')
             return True
         elif event.type() == QtCore.QEvent.KeyRelease:
             return True
@@ -69,7 +69,7 @@ Standard QKeySequenceEdit is too slow and does not make any difference between n
 class ShortcutEdit(QLineEdit):
 
     """This signal is emitted whenever a new key or modifier is pressed
-    First parameteris the key (can be zero), second is a list of modifiers
+    First parameter is the key (can be zero), second is a list of modifiers
     """
     shortcutChanged = QtCore.pyqtSignal(int, list)
 
