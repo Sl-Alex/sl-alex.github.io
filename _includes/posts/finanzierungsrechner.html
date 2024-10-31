@@ -40,7 +40,7 @@
 </style>
 <script lang="javascript">
   var maklerProvisionProzent;
-  var grundwerbesteuerProzent;
+  var grunderwerbsteuerProzent;
   var notarGrundbuchProzent;
 
   var gesamtbetrag;
@@ -48,7 +48,7 @@
   
   // Calc Nebenkosten
   var maklerProvision;
-  var grundwerbesteuer;
+  var grunderwerbsteuer;
   var notarGrundbuch;
   
   var nebenkostenProzent;
@@ -65,7 +65,7 @@
 function updateInputs() {
   // Get inputs
   maklerProvisionProzent = parseFloat(document.getElementById("InputMaklerProvision").value);
-  grundwerbesteuerProzent = parseFloat(document.getElementById("InputGrundwerbesteuer").value);
+  grunderwerbsteuerProzent = parseFloat(document.getElementById("InputGrunderwerbsteuer").value);
   notarGrundbuchProzent = parseFloat(document.getElementById("InputNotarGrundbuch").value);
 
   gesamtbetrag = parseFloat(document.getElementById("InputGesamtBetrag").value);
@@ -73,14 +73,14 @@ function updateInputs() {
   
   // Calc Nebenkosten
   maklerProvision = gesamtbetrag * maklerProvisionProzent / 100;
-  grundwerbesteuer = gesamtbetrag * grundwerbesteuerProzent / 100;
+  grunderwerbsteuer = gesamtbetrag * grunderwerbsteuerProzent / 100;
   notarGrundbuch = gesamtbetrag * notarGrundbuchProzent / 100;
   maklerProvision = Math.round((maklerProvision + Number.EPSILON) * 100) / 100
-  grundwerbesteuer = Math.round((grundwerbesteuer + Number.EPSILON) * 100) / 100
+  grunderwerbsteuer = Math.round((grunderwerbsteuer + Number.EPSILON) * 100) / 100
   notarGrundbuch = Math.round((notarGrundbuch + Number.EPSILON) * 100) / 100
   
-  nebenkostenProzent = maklerProvisionProzent + grundwerbesteuerProzent + notarGrundbuchProzent;
-  nebenkosten = maklerProvision + grundwerbesteuer + notarGrundbuch;
+  nebenkostenProzent = maklerProvisionProzent + grunderwerbsteuerProzent + notarGrundbuchProzent;
+  nebenkosten = maklerProvision + grunderwerbsteuer + notarGrundbuch;
   nebenkosten = Math.round((nebenkosten + Number.EPSILON) * 100) / 100
   
   darlehensbetrag = gesamtbetrag + nebenkosten - eigenkapital;
@@ -99,11 +99,11 @@ function updateInputs() {
   sonderTilgung = parseFloat(document.getElementById("InputSondertilgung").value);
 
   console.log("MaklerProvisionProzent: " + maklerProvisionProzent)
-  console.log("GrundwerbesteuerProzent: " + grundwerbesteuerProzent)
+  console.log("GrunderwerbsteuerProzent: " + grunderwerbsteuerProzent)
   console.log("NotarGrundbuchProzent: " + notarGrundbuchProzent)
   console.log("NebenkostenProzent: " + nebenkostenProzent)
   console.log("MaklerProvision: " + maklerProvision)
-  console.log("Grundwerbesteuer: " + grundwerbesteuer)
+  console.log("Grunderwerbsteuer: " + grunderwerbsteuer)
   console.log("NotarGrundbuch: " + notarGrundbuch)
   console.log("Nebenkosten: " + nebenkosten)
   console.log("GesamtBetrag: " + gesamtbetrag)
@@ -114,7 +114,7 @@ function updateInputs() {
   
   // Update calculated inputs
   document.getElementById("calcMaklerProvision").innerText = maklerProvision.toFixed(2) + " €"
-  document.getElementById("calcGrundwerbesteuer").innerText = grundwerbesteuer.toFixed(2) + " €"
+  document.getElementById("calcGrunderwerbsteuer").innerText = grunderwerbsteuer.toFixed(2) + " €"
   document.getElementById("calcNotarGrundbuch").innerText = notarGrundbuch.toFixed(2) + " €"
   document.getElementById("calcNebenkosten").innerText = nebenkosten.toFixed(2) + " €"
   document.getElementById("calcDarlehensbetrag").innerText = darlehensbetrag.toFixed(2)
@@ -269,9 +269,9 @@ new Chartist.Line('.ct-chart', data, options);
     <td id="calcMaklerProvision"></td>
   </tr>
   <tr>
-    <td>Grundwerbesteuer, %</td>
-    <td><input id="InputGrundwerbesteuer" type="number" onchange="updateInputs()" value="3.5"></td>
-    <td id="calcGrundwerbesteuer"></td>
+    <td>Grunderwerbsteuer, %</td>
+    <td><input id="InputGrunderwerbsteuer" type="number" onchange="updateInputs()" value="3.5"></td>
+    <td id="calcGrunderwerbsteuer"></td>
   </tr>
   <tr>
     <td>Notar und Grundbuch, %</td>
